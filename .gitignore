@@ -1,0 +1,27 @@
+# File-based project format
+*.iws
+
+# Byte-compiled / optimized / DLL files
+util/__pycache__/
+__pycache__/
+*.py[cod]
+
+# JSON
+*.json
+
+# IntelliJ
+.idea/
+out/
+*.iml
+modules.xml
+*.ipr
+
+# Virtualenv
+venv/
+
+# Log files
+*.log
+*.txt
+
+# Don't ignore requirements
+!requirements.txt
