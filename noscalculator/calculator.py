@@ -1,5 +1,6 @@
 from datastructs import elemental_bonus
 from datastructs import up_bonus
+from math import floor
 
 
 class Calculator:
@@ -15,10 +16,10 @@ class Calculator:
                      + self.attacker.atk_effects
                      + self.attacker.atk_sp()
                      + self.attacker.dmg_enhanced)
-                    * (1 + self.attacker.dmg_increase_pvp))
+                    * (1 + self.attacker.dmg_increase_pvp / 100))
 
         return ((atk_char + self.attacker.atk_skill + 15)
-                * (1 + self.attacker.dmg_increase_s)
+                * (1 + self.attacker.dmg_increase_s / 100)
                 * (1 + self.attacker.dmg_increase_eq / 100 * int(soft)))
 
     def def_tot(self):
@@ -29,16 +30,16 @@ class Calculator:
                      + self.defender.def_effects
                      + self.defender.def_sp()
                      + self.defender.def_enhanced)
-                    * (1 + self.defender.def_increase_s
-                       + self.defender.def_increase_pvp
-                       - self.attacker.def_reduction_pvp))
+                    * (1 + (self.defender.def_increase_s
+                            + self.defender.def_increase_pvp
+                            - self.attacker.def_reduction_pvp) / 100))
 
         return ((def_char + self.defender.def_skill)
-                * (1 + self.defender.def_pet_pvp)
-                * (1 + int(self.defender.def_pot) * 0.2
-                   + int(self.defender.def_oil) * 0.05
-                   + self.defender.def_costume
-                   + self.defender.def_pet))
+                * (1 + self.defender.def_pet_pvp / 100)
+                * (1 + (int(self.defender.def_pot) * 20
+                        + int(self.defender.def_oil) * 5
+                        + self.defender.def_costume
+                        + self.defender.def_pet) / 100))
 
     def atk_ele_tot(self, atk_eq, soft=False):
         atk_ele = ((self.atk_tot(atk_eq, soft=soft) + 100)
@@ -67,7 +68,7 @@ class Calculator:
 
         return (self.atk_ele_tot(atk_eq)
                 * (1 + elemental_bonus(matchup))
-                * (1 - res))
+                * (1 - res / 100))
 
     def final_damage(self, atk_eq, crit=False, soft=False):
         morale = self.attacker.morale() - self.defender.morale()
@@ -76,14 +77,14 @@ class Calculator:
                + self.elemental_damage(atk_eq)
                + self.attacker.mob_damage())
 
-        dmg *= ((1 + self.attacker.atk_pvp_book)
-                * (1 + self.attacker.atk_pvp_hono)
-                * (1 - self.defender.def_pvp_book)
-                * (1 - self.defender.def_pvp_hono)
-                * (1 - self.defender.magic_dmg_reduction)
-                * (1 + self.attacker.atk_hat
-                   + self.attacker.atk_pet
-                   + int(self.attacker.atk_pot) * 0.2))
+        dmg *= ((1 + self.attacker.atk_pvp_book / 100)
+                * (1 + self.attacker.atk_pvp_hono / 100)
+                * (1 - self.defender.def_pvp_book / 100)
+                * (1 - self.defender.def_pvp_hono / 100)
+                * (1 - self.defender.magic_dmg_reduction / 100)
+                * (1 + (self.attacker.atk_hat
+                        + self.attacker.atk_pet
+                        + int(self.attacker.atk_pot) * 20) / 100))
 
         return dmg
 
@@ -107,4 +108,4 @@ class Calculator:
         if average:
             return (dmg_min + dmg_max) / 2
 
-        return dmg_min, dmg_max
+        return floor(dmg_min), floor(dmg_max)
