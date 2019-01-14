@@ -11,7 +11,7 @@ class Defender(TypedJsonMixin):
 
     # Gear
     def_equip: int = 0
-    crit_dmg_reduction: int = 100
+    crit_dmg_reduction: int = 0
     crit_prob_reduction: int = 10
     up: int = 0
 
