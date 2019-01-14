@@ -70,11 +70,16 @@ class Calculator:
                 * (1 + elemental_bonus(matchup))
                 * (1 - res / 100))
 
-    def final_damage(self, atk_eq, crit=False, soft=False):
+    def final_damage(self, atk_eq, crit=False, soft=False, no_ele=False):
         morale = self.attacker.morale() - self.defender.morale()
 
+        if no_ele:
+            elemental_damage = 0
+        else:
+            elemental_damage = self.elemental_damage(atk_eq)
+
         dmg = ((self.physical_damage(atk_eq, crit=crit, soft=soft) + morale)
-               + self.elemental_damage(atk_eq)
+               + elemental_damage
                + self.attacker.mob_damage())
 
         dmg *= ((1 + self.attacker.atk_pvp_book / 100)
@@ -88,16 +93,18 @@ class Calculator:
 
         return dmg
 
-    def damage(self, crit=False, soft=False, average=False):
+    def damage(self, crit=False, soft=False, no_ele=False, average=False):
         dmg_min = self.final_damage(
             self.attacker.atk_equip_min,
             crit=crit,
-            soft=soft
+            soft=soft,
+            no_ele=no_ele
         )
         dmg_max = self.final_damage(
             self.attacker.atk_equip_max,
             crit=crit,
-            soft=soft
+            soft=soft,
+            no_ele=no_ele
         )
 
         dmg_min = max(dmg_min, 1)
