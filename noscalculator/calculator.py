@@ -71,8 +71,9 @@ class Calculator:
 
     def final_damage(self, atk_eq, crit=False, soft=False):
         morale = self.attacker.morale() - self.defender.morale()
+        print("morale:", morale)
 
-        dmg = ((self.physical_damage(atk_eq, crit=crit, soft=soft) - morale)
+        dmg = ((self.physical_damage(atk_eq, crit=crit, soft=soft) + morale)
                + self.elemental_damage(atk_eq)
                + self.attacker.mob_damage())
 
