@@ -19,7 +19,7 @@ class Calculator:
 
         return ((atk_char + self.attacker.atk_skill + 15)
                 * (1 + self.attacker.dmg_increase_s)
-                * (1 + self.attacker.dmg_increase_eq * int(soft)))
+                * (1 + self.attacker.dmg_increase_eq / 100 * int(soft)))
 
     def def_tot(self):
         up = min(max(self.defender.up - self.attacker.up, 0), 10)
@@ -42,7 +42,7 @@ class Calculator:
 
     def atk_ele_tot(self, atk_eq, soft=False):
         atk_ele = ((self.atk_tot(atk_eq, soft=soft) + 100)
-                   * (self.attacker.fairy + self.attacker.ele_sp()))
+                   * (self.attacker.fairy + self.attacker.ele_sp()) / 100)
 
         return (atk_ele
                 + self.attacker.ele_skill
