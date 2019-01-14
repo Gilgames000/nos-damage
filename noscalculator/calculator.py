@@ -54,8 +54,8 @@ class Calculator:
                * (1 + int(self.attacker.atk_oil) * 0.05))
 
         if crit:
-            dmg *= (1 + self.attacker.crit_dmg
-                    - self.defender.crit_dmg_reduction)
+            dmg *= (1 + self.attacker.crit_dmg / 100
+                    - self.defender.crit_dmg_reduction / 100)
 
         return dmg
 
@@ -71,7 +71,6 @@ class Calculator:
 
     def final_damage(self, atk_eq, crit=False, soft=False):
         morale = self.attacker.morale() - self.defender.morale()
-        print("morale:", morale)
 
         dmg = ((self.physical_damage(atk_eq, crit=crit, soft=soft) + morale)
                + self.elemental_damage(atk_eq)
