@@ -60,13 +60,13 @@ class Calculator:
 
         return dmg
 
-    def elemental_damage(self, atk_eq):
+    def elemental_damage(self, atk_eq, soft=False):
         matchup = f"{self.attacker.type}>{self.defender.type}"
         res = (self.defender.res
                - self.attacker.res_reduction
                - self.attacker.res_reduction_pvp)
 
-        return (self.atk_ele_tot(atk_eq)
+        return (self.atk_ele_tot(atk_eq, soft=soft)
                 * (1 + elemental_bonus(matchup))
                 * (1 - res / 100))
 
@@ -76,7 +76,7 @@ class Calculator:
         if no_ele:
             elemental_damage = 0
         else:
-            elemental_damage = self.elemental_damage(atk_eq)
+            elemental_damage = self.elemental_damage(atk_eq, soft=soft)
 
         dmg = ((self.physical_damage(atk_eq, crit=crit, soft=soft) + morale)
                + elemental_damage
