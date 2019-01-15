@@ -2,6 +2,8 @@ from dataclasses import dataclass
 
 from typed_json_dataclass import TypedJsonMixin
 
+import util.sptools as sp
+
 
 @dataclass
 class Attacker(TypedJsonMixin):
@@ -27,6 +29,7 @@ class Attacker(TypedJsonMixin):
     ele_prop_increase: int = 0
 
     # SP
+    _sp_build = [0, 0, 0, 0]
     atk_sp_build: int = 0
     atk_sp_pp: int = 0
     atk_sp_bonus: int = 0
@@ -54,6 +57,18 @@ class Attacker(TypedJsonMixin):
     # Mob
     is_mob: bool = False
 
+    def __post_init__(self):
+        self._update_build()
+
+    @property
+    def sp_build(self):
+        return self._sp_build
+
+    @sp_build.setter
+    def sp_build(self, build):
+        self._sp_build = build
+        self._update_build()
+
     def atk_sp(self):
         return (self.atk_sp_build
                 + self.atk_sp_bonus
@@ -72,3 +87,9 @@ class Attacker(TypedJsonMixin):
         # TODO: implement mob damage formula
 
         return int(self.is_mob) * dmg
+
+    def _update_build(self):
+        self.atk_sp_build = sp.atk_base_build(build=self._sp_build)
+        self.atk_sp_bonus = sp.atk_bonus_build(build=self._sp_build)
+        self.ele_sp_build = sp.ele_base_build(build=self._sp_build)
+        self.ele_sp_bonus = sp.ele_bonus_build(build=self._sp_build)
