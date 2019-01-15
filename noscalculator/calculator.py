@@ -117,3 +117,14 @@ class Calculator:
             return (dmg_min + dmg_max) / 2
 
         return floor(dmg_min), floor(dmg_max)
+
+    def average_damage(self):
+        soft = self.attacker.dmg_increase_eq_prob / 100
+        crit = self.attacker.crit_prob / 100
+        soft_crit = soft / 100 * crit / 100
+        normal = 1 - soft - crit - soft_crit
+
+        return (self.damage() * normal
+                + self.damage(soft=True) * soft
+                + self.damage(crit=True) * crit
+                + self.damage(soft=True, crit=True) * soft_crit)
