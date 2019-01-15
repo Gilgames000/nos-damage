@@ -1,6 +1,7 @@
-from datastructs import elemental_bonus
-from datastructs import up_bonus
 from math import floor
+
+from datastructs import elemental_bonus
+from datastructs import equip_up_bonus
 
 
 class Calculator:
@@ -11,7 +12,7 @@ class Calculator:
     def atk_tot(self, atk_eq, soft=False):
         up = min(max(self.attacker.up - self.defender.up, 0), 10)
 
-        atk_char = ((atk_eq * (1 + up_bonus[up])
+        atk_char = ((atk_eq * (1 + equip_up_bonus[up])
                      + self.attacker.atk_base
                      + self.attacker.atk_effects
                      + self.attacker.atk_sp()
@@ -25,7 +26,7 @@ class Calculator:
     def def_tot(self):
         up = min(max(self.defender.up - self.attacker.up, 0), 10)
 
-        def_char = ((self.defender.def_equip * (1 + up_bonus[up])
+        def_char = ((self.defender.def_equip * (1 + equip_up_bonus[up])
                      + self.defender.def_base
                      + self.defender.def_effects
                      + self.defender.def_sp()
