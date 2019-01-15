@@ -124,7 +124,7 @@ class Calculator:
         soft_crit = soft / 100 * crit / 100
         normal = 1 - soft - crit - soft_crit
 
-        return (self.damage() * normal
-                + self.damage(soft=True) * soft
-                + self.damage(crit=True) * crit
-                + self.damage(soft=True, crit=True) * soft_crit)
+        return (self.damage(average=True) * normal
+                + self.damage(average=True, soft=True) * soft
+                + self.damage(average=True, crit=True) * crit
+                + self.damage(average=True, soft=True, crit=True) * soft_crit)
