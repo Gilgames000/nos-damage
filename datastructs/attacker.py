@@ -16,6 +16,7 @@ class Attacker(TypedJsonMixin):
     atk_equip_max: int = 0
     res_reduction: int = 0
     dmg_increase_eq: int = 0
+    dmg_increase_eq_prob: int = 0
     crit_dmg: int = 100
     crit_prob: int = 10
     up: int = 0
