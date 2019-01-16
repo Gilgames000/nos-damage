@@ -73,7 +73,7 @@ class Attacker(TypedJsonMixin):
     def atk_sp(self):
         return (self.atk_sp_build
                 + self.atk_sp_bonus
-                + self.atk_sp_pp)
+                + self.atk_sp_pp * 10)
 
     def ele_sp(self):
         return (self.ele_sp_build
