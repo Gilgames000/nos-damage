@@ -35,6 +35,8 @@ class Attacker(TypedJsonMixin):
     atk_sp_pp: int = 0
     atk_sp_bonus: int = 0
     atk_skill: int = 0
+    crit_dmg_bonus: int = 0
+    crit_prob_bonus: int = 0
     ele_sp_build: int = 0
     ele_sp_pp: int = 0
     ele_sp_bonus: int = 0
@@ -98,5 +100,7 @@ class Attacker(TypedJsonMixin):
     def _update_build(self):
         self.atk_sp_build = sp.atk_base_build(build=self._sp_build)
         self.atk_sp_bonus = sp.atk_bonus_build(build=self._sp_build)
+        self.crit_dmg_bonus = sp.crit_dmg_increase(build=self._sp_build)
+        self.crit_prob_bonus = sp.crit_prob_increase(build=self._sp_build)
         self.ele_sp_build = sp.ele_base_build(build=self._sp_build)
         self.ele_sp_bonus = sp.ele_bonus_build(build=self._sp_build)
