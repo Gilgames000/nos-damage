@@ -39,14 +39,14 @@ class Optimizer:
         self.calculator.attacker.sp_build = [x[0], 0, x[1], 0]
         return self.calculator.damage(average=True, soft=True, crit=True)
 
-    def maximize_damage(self, target_dmg=DamageType.ALL):
+    def maximize_damage(self, target_dmg=DamageType.ALL, atk_sl=0, ele_sl=0):
         # Update calculator just in case it changed
         self.calculator = Calculator(self.attacker, self.defender)
 
         valid_builds = [
-            (i, j)
-            for i in range(0, 101)
-            for j in range(0, 101)
+            (i + atk_sl, j + ele_sl)
+            for i in range(0, 101 - atk_sl)
+            for j in range(0, 101 - ele_sl)
             if self.is_build_valid((i, j))
         ]
 
