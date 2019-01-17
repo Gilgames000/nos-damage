@@ -1,4 +1,5 @@
 import util.sptools as sp
+from datastructs.constants import DamageType
 from noscalculator import Calculator
 
 
@@ -18,11 +19,27 @@ class Optimizer:
     def is_build_valid(self, x):
         return sp.validate_build(self.job, self.up, [x[0], 0, x[1], 0])
 
-    def target(self, x):
+    def target_all(self, x):
         self.calculator.attacker.sp_build = [x[0], 0, x[1], 0]
         return self.calculator.average_damage()
 
-    def maximize_damage(self):
+    def target_normal(self, x):
+        self.calculator.attacker.sp_build = [x[0], 0, x[1], 0]
+        return self.calculator.damage(average=True)
+
+    def target_soft(self, x):
+        self.calculator.attacker.sp_build = [x[0], 0, x[1], 0]
+        return self.calculator.damage(average=True, soft=True)
+
+    def target_crit(self, x):
+        self.calculator.attacker.sp_build = [x[0], 0, x[1], 0]
+        return self.calculator.damage(average=True, crit=True)
+
+    def target_softcrit(self, x):
+        self.calculator.attacker.sp_build = [x[0], 0, x[1], 0]
+        return self.calculator.damage(average=True, soft=True, crit=True)
+
+    def maximize_damage(self, target_dmg=DamageType.ALL):
         # Update calculator just in case it changed
         self.calculator = Calculator(self.attacker, self.defender)
 
@@ -33,7 +50,18 @@ class Optimizer:
             if self.is_build_valid((i, j))
         ]
 
-        result = list(zip(valid_builds, map(self.target, valid_builds)))
+        if target_dmg == DamageType.NORMAL:
+            target = self.target_normal
+        elif target_dmg == DamageType.SOFT:
+            target = self.target_soft
+        elif target_dmg == DamageType.CRIT:
+            target = self.target_crit
+        elif target_dmg == DamageType.SOFTCRIT:
+            target = self.target_softcrit
+        else:
+            target = self.target_all
+
+        result = list(zip(valid_builds, map(target, valid_builds)))
         result.sort(key=lambda x: x[1], reverse=True)
 
         return result
