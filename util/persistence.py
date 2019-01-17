@@ -1,8 +1,7 @@
 import json
 import logging
 
-from datastructs import Attacker
-from datastructs import Defender
+from datastructs import Entity
 
 
 def save_attacker(attacker, filename):
@@ -15,12 +14,12 @@ def save_defender(defender, filename):
 
 def load_attacker(filename):
     d = load_dataclass(filename)
-    return Attacker.from_dict(d)
+    return Entity.from_dict(d)
 
 
 def load_defender(filename):
     d = load_dataclass(filename)
-    return Defender.from_dict(d)
+    return Entity.from_dict(d)
 
 
 def save_dataclass(data, filename):

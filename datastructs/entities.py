@@ -6,12 +6,14 @@ import util.sptools as sp
 
 
 @dataclass
-class Attacker(TypedJsonMixin):
+class Entity(TypedJsonMixin):
     # Base
     atk_base: int = 0
+    def_base: int = 0
     level: int = 1
+    is_mob: bool = False
 
-    # Gear
+    # Weapon
     atk_equip_min: int = 0
     atk_equip_max: int = 0
     res_reduction: int = 0
@@ -19,15 +21,26 @@ class Attacker(TypedJsonMixin):
     dmg_increase_eq_prob: int = 0
     crit_dmg_eq: int = 0
     crit_prob_eq: int = 0
-    up: int = 0
+    weapon_up: int = 0
 
-    # Shell
+    # Armor
+    def_equip: int = 0
+    crit_dmg_reduction: int = 0
+    crit_prob_reduction: int = 0
+    armor_up: int = 0
+
+    # Weapon shell
     dmg_enhanced: int = 0
     dmg_increase_s: int = 0
     dmg_increase_pvp: int = 0
     def_reduction_pvp: int = 0
     res_reduction_pvp: int = 0
     ele_prop_increase: int = 0
+
+    # Armor shell
+    def_enhanced: int = 0
+    def_increase_s: int = 0
+    def_increase_pvp: int = 0
 
     # SP
     _sp_build = [0, 0, 0, 0]
@@ -37,12 +50,16 @@ class Attacker(TypedJsonMixin):
     atk_skill: int = 0
     crit_dmg_bonus: int = 0
     crit_prob_bonus: int = 0
+    def_sp_build: int = 0
+    def_sp_pp: int = 0
+    def_sp_bonus: int = 0
     ele_sp_build: int = 0
     ele_sp_pp: int = 0
     ele_sp_bonus: int = 0
     ele_skill: int = 0
+    magic_dmg_reduction: int = 0
 
-    # Other
+    # Other attack
     atk_effects: int = 0
     ele_effects: int = 0
     atk_oil: bool = False
@@ -53,12 +70,24 @@ class Attacker(TypedJsonMixin):
     atk_pvp_book: int = 0
     morale_bonus: int = 0
 
+    # Other defense
+    def_effects: int = 0
+    def_skill: int = 0
+    def_oil: bool = False
+    def_pot: bool = False
+    def_costume: int = 0
+    def_pet: int = 0
+    def_pet_pvp: int = 0
+    def_pvp_hono: int = 0
+    def_pvp_book: int = 0
+    morale_bonus: int = 0
+
     # Element
     fairy: int = 0
     type: str = "no_elem"
+    res: int = 0
 
     # Mob
-    is_mob: bool = False
 
     def __post_init__(self):
         self._update_build()
@@ -77,6 +106,16 @@ class Attacker(TypedJsonMixin):
                 + self.atk_sp_bonus
                 + self.atk_sp_pp * 10)
 
+    def ele_sp(self):
+        return (self.ele_sp_build
+                + self.ele_sp_bonus
+                + self.ele_sp_pp)
+
+    def def_sp(self):
+        return (self.def_sp_build
+                + self.def_sp_bonus
+                + self.def_sp_pp)
+
     def crit_dmg(self):
         return (self.crit_dmg_eq
                 + self.crit_dmg_bonus)
@@ -84,11 +123,6 @@ class Attacker(TypedJsonMixin):
     def crit_prob(self):
         return (self.crit_prob_eq
                 + self.crit_prob_bonus)
-
-    def ele_sp(self):
-        return (self.ele_sp_build
-                + self.ele_sp_bonus
-                + self.ele_sp_pp)
 
     def morale(self):
         return self.level + self.morale_bonus
@@ -108,7 +142,9 @@ class Attacker(TypedJsonMixin):
     def _update_build(self):
         self.atk_sp_build = sp.atk_base_build(build=self._sp_build)
         self.atk_sp_bonus = sp.atk_bonus_build(build=self._sp_build)
-        self.crit_dmg_bonus = sp.crit_dmg_increase(build=self._sp_build)
-        self.crit_prob_bonus = sp.crit_prob_increase(build=self._sp_build)
+        self.def_sp_build = sp.def_base_build(build=self._sp_build)
+        self.def_sp_bonus = sp.def_bonus_build(build=self._sp_build)
         self.ele_sp_build = sp.ele_base_build(build=self._sp_build)
         self.ele_sp_bonus = sp.ele_bonus_build(build=self._sp_build)
+        self.crit_dmg_bonus = sp.crit_dmg_increase(build=self._sp_build)
+        self.crit_prob_bonus = sp.crit_prob_increase(build=self._sp_build)

@@ -10,7 +10,7 @@ class Calculator:
         self.defender = defender
 
     def atk_tot(self, atk_eq, soft=False):
-        up = min(max(self.attacker.up - self.defender.up, 0), 10)
+        up = min(max(self.attacker.weapon_up - self.defender.armor_up, 0), 10)
 
         atk_char = (
                 (atk_eq * (1 + equip_up_bonus[up])
@@ -28,7 +28,7 @@ class Calculator:
         )
 
     def def_tot(self):
-        up = min(max(self.defender.up - self.attacker.up, 0), 10)
+        up = min(max(self.defender.armor_up - self.attacker.weapon_up, 0), 10)
 
         def_char = (
                 (self.defender.def_equip * (1 + equip_up_bonus[up])
