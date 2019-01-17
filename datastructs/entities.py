@@ -11,6 +11,7 @@ class Entity(TypedJsonMixin):
     atk_base: int = 0
     def_base: int = 0
     level: int = 1
+    is_mage: bool = False
     is_mob: bool = False
 
     # Weapon
@@ -117,12 +118,12 @@ class Entity(TypedJsonMixin):
                 + self.def_sp_pp)
 
     def crit_dmg(self):
-        return (self.crit_dmg_eq
-                + self.crit_dmg_bonus)
+        return int(not self.is_mage) * (self.crit_dmg_eq
+                                        + self.crit_dmg_bonus)
 
     def crit_prob(self):
-        return (self.crit_prob_eq
-                + self.crit_prob_bonus)
+        return int(not self.is_mage) * (self.crit_prob_eq
+                                        + self.crit_prob_bonus)
 
     def morale(self):
         return self.level + self.morale_bonus
