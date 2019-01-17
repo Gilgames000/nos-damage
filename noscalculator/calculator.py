@@ -10,6 +10,10 @@ class Calculator:
         self.defender = defender
 
     def atk_tot(self, atk_eq, soft=False):
+        is_pvp = int(
+            not self.attacker.is_mob
+            and not self.defender.is_mob
+        )
         up = min(max(self.attacker.weapon_up - self.defender.armor_up, 0), 10)
 
         atk_char = (
@@ -18,7 +22,7 @@ class Calculator:
                  + self.attacker.atk_effects
                  + self.attacker.atk_sp()
                  + self.attacker.dmg_enhanced)
-                * (1 + self.attacker.dmg_increase_pvp / 100)
+                * (1 + is_pvp * self.attacker.dmg_increase_pvp / 100)
         )
 
         return (
@@ -28,6 +32,10 @@ class Calculator:
         )
 
     def def_tot(self):
+        is_pvp = int(
+            not self.attacker.is_mob
+            and not self.defender.is_mob
+        )
         up = min(max(self.defender.armor_up - self.attacker.weapon_up, 0), 10)
 
         def_char = (
@@ -37,13 +45,13 @@ class Calculator:
                  + self.defender.def_sp()
                  + self.defender.def_enhanced)
                 * (1 + (self.defender.def_increase_s
-                        + self.defender.def_increase_pvp
-                        - self.attacker.def_reduction_pvp) / 100)
+                        + is_pvp * self.defender.def_increase_pvp
+                        - is_pvp * self.attacker.def_reduction_pvp) / 100)
         )
 
         return (
                 (def_char + self.defender.def_skill)
-                * (1 + self.defender.def_pet_pvp / 100)
+                * (1 + is_pvp * self.defender.def_pet_pvp / 100)
                 * (1 + (int(self.defender.def_pot) * 20
                         + int(self.defender.def_oil) * 5
                         + self.defender.def_costume
@@ -78,11 +86,15 @@ class Calculator:
         return dmg
 
     def elemental_damage(self, atk_eq, soft=False):
+        is_pvp = int(
+            not self.attacker.is_mob
+            and not self.defender.is_mob
+        )
         matchup = f"{self.attacker.type}>{self.defender.type}"
         res = (
                 self.defender.res
                 - self.attacker.res_reduction
-                - self.attacker.res_reduction_pvp
+                - is_pvp * self.attacker.res_reduction_pvp
         )
 
         return (
@@ -93,6 +105,10 @@ class Calculator:
 
     def final_damage(self, atk_eq, crit=False, soft=False, no_ele=False,
                      is_min=False, max_crit_dmg=0):
+        is_pvp = int(
+            not self.attacker.is_mob
+            and not self.defender.is_mob
+        )
         morale = self.attacker.morale() - self.defender.morale()
 
         if no_ele:
@@ -113,10 +129,10 @@ class Calculator:
         )
 
         dmg *= (
-                (1 + self.attacker.atk_pvp_book / 100)
-                * (1 + self.attacker.atk_pvp_hono / 100)
-                * (1 - self.defender.def_pvp_book / 100)
-                * (1 - self.defender.def_pvp_hono / 100)
+                (1 + is_pvp * self.attacker.atk_pvp_book / 100)
+                * (1 + is_pvp * self.attacker.atk_pvp_hono / 100)
+                * (1 - is_pvp * self.defender.def_pvp_book / 100)
+                * (1 - is_pvp * self.defender.def_pvp_hono / 100)
                 * (1 - self.defender.magic_dmg_reduction / 100)
                 * (1 + (self.attacker.atk_hat
                         + self.attacker.atk_pet
