@@ -300,6 +300,38 @@ def hp_points(hp=0, build=None):
                      "between 0 and 100")
 
 
+def crit_dmg_increase(attack=0, build=None):
+    if build:
+        attack = build[0]
+
+    if 0 <= attack <= 39:
+        return 0
+    if 40 <= attack <= 89:
+        return 10
+    if 90 <= attack <= 99:
+        return 30
+    if attack == 100:
+        return 50
+    raise ValueError("SP build attack points must be an integer"
+                     "between 0 and 100")
+
+
+def crit_prob_increase(attack=0, build=None):
+    if build:
+        attack = build[0]
+
+    if 0 <= attack <= 19:
+        return 0
+    if 20 <= attack <= 79:
+        return 2
+    if 80 <= attack <= 99:
+        return 5
+    if attack == 100:
+        return 8
+    raise ValueError("SP build attack points must be an integer"
+                     "between 0 and 100")
+
+
 def build_points(build):
     return (atk_points(build[0])
             + def_points(build[1])
