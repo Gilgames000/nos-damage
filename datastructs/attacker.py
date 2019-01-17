@@ -84,10 +84,16 @@ class Attacker(TypedJsonMixin):
         return self.level + self.morale_bonus
 
     def mob_damage(self):
-        dmg = 0
-        # TODO: implement mob damage formula
-
-        return int(self.is_mob) * dmg
+        if not self.is_mob:
+            return 0
+        if 0 <= self.level <= 44:
+            return 0
+        if 45 <= self.level <= 55:
+            return self.level * 1
+        if 56 <= self.level <= 69:
+            return self.level * 2
+        if self.level >= 70:
+            return self.level * 5
 
     def _update_build(self):
         self.atk_sp_build = sp.atk_base_build(build=self._sp_build)
