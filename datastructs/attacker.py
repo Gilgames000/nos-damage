@@ -17,8 +17,8 @@ class Attacker(TypedJsonMixin):
     res_reduction: int = 0
     dmg_increase_eq: int = 0
     dmg_increase_eq_prob: int = 0
-    crit_dmg: int = 100
-    crit_prob: int = 10
+    crit_dmg_eq: int = 0
+    crit_prob_eq: int = 0
     up: int = 0
 
     # Shell
@@ -76,6 +76,14 @@ class Attacker(TypedJsonMixin):
         return (self.atk_sp_build
                 + self.atk_sp_bonus
                 + self.atk_sp_pp * 10)
+
+    def crit_dmg(self):
+        return (self.crit_dmg_eq
+                + self.crit_dmg_bonus)
+
+    def crit_prob(self):
+        return (self.crit_prob_eq
+                + self.crit_prob_bonus)
 
     def ele_sp(self):
         return (self.ele_sp_build

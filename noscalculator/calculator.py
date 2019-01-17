@@ -71,7 +71,7 @@ class Calculator:
 
         if crit:
             dmg *= (
-                    1 + self.attacker.crit_dmg / 100
+                    1 + self.attacker.crit_dmg() / 100
                     - self.defender.crit_dmg_reduction / 100
             )
 
@@ -161,7 +161,7 @@ class Calculator:
 
     def average_damage(self):
         soft = self.attacker.dmg_increase_eq_prob / 100
-        crit = self.attacker.crit_prob / 100
+        crit = self.attacker.crit_prob() / 100
         soft_crit = soft / 100 * crit / 100
         normal = 1 - soft - crit - soft_crit
 
