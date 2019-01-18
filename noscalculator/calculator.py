@@ -203,3 +203,8 @@ class Calculator:
                 + self.damage(average=True, crit=True) * crit
                 + self.damage(average=True, soft=True, crit=True) * soft_crit
         )
+
+    def swap_attacker_defender(self):
+        tmp = self.attacker
+        self.attacker = self.defender
+        self.defender = tmp
