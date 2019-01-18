@@ -1,1 +1,3 @@
+PySide2==5.12.0
+shiboken2==5.12.0
 typed-json-dataclass==0.1.1
