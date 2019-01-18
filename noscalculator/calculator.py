@@ -1,7 +1,8 @@
 from math import floor
 
-from datastructs import elemental_bonus
-from datastructs import equip_up_bonus
+from datastructs.constants import elemental_bonus
+from datastructs.constants import equip_up_bonus
+from datastructs import MobType
 
 
 class Calculator:
@@ -25,9 +26,24 @@ class Calculator:
                 * (1 + is_pvp * self.attacker.dmg_increase_pvp / 100)
         )
 
+        mob_type_dmg = 0
+        if self.defender.is_mob:
+            if self.defender.mob_type == MobType.LOW_SOCIETY:
+                mob_type_dmg = self.attacker.dmg_increase_low_society
+            elif self.defender.mob_type == MobType.EVIL:
+                mob_type_dmg = self.attacker.dmg_increase_evil
+            elif self.defender.mob_type == MobType.UNDEAD:
+                mob_type_dmg = self.attacker.dmg_increase_undead
+            elif self.defender.mob_type == MobType.PLANT:
+                mob_type_dmg = self.attacker.dmg_increase_plant
+            elif self.defender.mob_type == MobType.LARGE:
+                mob_type_dmg = self.attacker.dmg_increase_large
+            elif self.defender.mob_type == MobType.ANIMAL:
+                mob_type_dmg = self.attacker.dmg_increase_animal
+
         return (
                 (atk_char + self.attacker.atk_skill + 15)
-                * (1 + self.attacker.dmg_increase_s / 100)
+                * (1 + self.attacker.dmg_increase_s + mob_type_dmg / 100)
                 * (1 + self.attacker.dmg_increase_eq / 100 * int(soft))
         )
 
