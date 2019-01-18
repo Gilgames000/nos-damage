@@ -31,3 +31,13 @@ class DamageType(Enum):
     SOFT = 3
     CRIT = 4
     SOFTCRIT = 5
+
+
+class MobType(Enum):
+    NONE = 0
+    LOW_SOCIETY = 1
+    EVIL = 2
+    UNDEAD = 3
+    PLANT = 4
+    LARGE = 5
+    ANIMAL = 6

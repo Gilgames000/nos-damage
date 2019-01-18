@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typed_json_dataclass import TypedJsonMixin
 
 import util.sptools as sp
+from datastructs.constants import MobType
 
 
 @dataclass
@@ -13,6 +14,7 @@ class Entity(TypedJsonMixin):
     level: int = 1
     is_mage: bool = False
     is_mob: bool = False
+    mob_type: MobType = MobType.NONE
 
     # Weapon
     atk_equip_min: int = 0
@@ -37,6 +39,12 @@ class Entity(TypedJsonMixin):
     def_reduction_pvp: int = 0
     res_reduction_pvp: int = 0
     ele_prop_increase: int = 0
+    dmg_increase_low_society: int = 0
+    dmg_increase_evil: int = 0
+    dmg_increase_undead: int = 0
+    dmg_increase_plant: int = 0
+    dmg_increase_large: int = 0
+    dmg_increase_animal: int = 0
 
     # Armor shell
     def_enhanced: int = 0
