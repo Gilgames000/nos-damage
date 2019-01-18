@@ -39,7 +39,12 @@ class Optimizer:
         self.calculator.attacker.sp_build = [x[0], 0, x[1], 0]
         return self.calculator.damage(average=True, soft=True, crit=True)
 
-    def maximize_damage(self, target_dmg=DamageType.ALL, atk_sl=0, ele_sl=0):
+    def target_multiple(self, x):
+        self.calculator.attacker.sp_build = [x[0], 0, x[1], 0]
+        return self.calculator.damage_multiple_defenders()
+
+    def maximize_damage(self, target_dmg=DamageType.ALL, atk_sl=0, ele_sl=0,
+                        multiple_defenders=False):
         # Update calculator just in case it changed
         self.calculator = Calculator(self.attacker, self.defender)
 
@@ -50,7 +55,9 @@ class Optimizer:
             if self.is_build_valid((i, j))
         ]
 
-        if target_dmg == DamageType.NORMAL:
+        if multiple_defenders:
+            target = self.target_multiple
+        elif target_dmg == DamageType.NORMAL:
             target = self.target_normal
         elif target_dmg == DamageType.SOFT:
             target = self.target_soft
