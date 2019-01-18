@@ -2,13 +2,18 @@ from math import floor
 
 from datastructs.constants import elemental_bonus
 from datastructs.constants import equip_up_bonus
-from datastructs import MobType
+from datastructs.constants import MobType
+from datastructs.constants import DamageType
 
 
 class Calculator:
-    def __init__(self, attacker, defender):
+    def __init__(self, attacker, defender, defenders_list=None):
         self.attacker = attacker
         self.defender = defender
+
+        if not defenders_list:
+            defenders_list = []
+        self.defenders_list = defenders_list
 
     def atk_tot(self, atk_eq, soft=False):
         is_pvp = int(
@@ -208,3 +213,21 @@ class Calculator:
         tmp = self.attacker
         self.attacker = self.defender
         self.defender = tmp
+
+    def damage_multiple_defenders(self, defenders_list=None):
+        if defenders_list:
+            self.defenders_list = defenders_list
+
+        if len(self.defenders_list) == 0:
+            self.defenders_list.append(self.defender)
+
+        tmp = self.defender
+
+        dmg = []
+        for defender in self.defenders_list:
+            self.defender = defender
+            dmg.append(self.average_damage())
+
+        self.defender = tmp
+
+        return sum(dmg) / len(dmg)
