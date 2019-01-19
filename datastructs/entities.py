@@ -77,7 +77,6 @@ class Entity(TypedJsonMixin):
     atk_pet: int = 0
     atk_pvp_hono: int = 0
     atk_pvp_book: int = 0
-    morale_bonus: int = 0
 
     # Other defense
     def_effects: int = 0
@@ -89,14 +88,14 @@ class Entity(TypedJsonMixin):
     def_pet_pvp: int = 0
     def_pvp_hono: int = 0
     def_pvp_book: int = 0
-    morale_bonus: int = 0
 
     # Element
     fairy: int = 0
     type: str = "no_elem"
     res: int = 0
 
-    # Mob
+    # Buffs
+    morale_bonus: int = 0
 
     def __post_init__(self):
         self._update_build()
