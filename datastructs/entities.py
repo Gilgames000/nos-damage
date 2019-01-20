@@ -35,6 +35,7 @@ class Entity(TypedJsonMixin):
     # Weapon shell
     dmg_enhanced: int = 0
     dmg_increase_s: int = 0
+    crit_dmg_shell: int = 0
     dmg_increase_pvp: int = 0
     def_reduction_pvp: int = 0
     res_reduction_pvp: int = 0
@@ -126,6 +127,7 @@ class Entity(TypedJsonMixin):
 
     def crit_dmg(self):
         return int(not self.is_mage) * (self.crit_dmg_eq
+                                        + self.crit_dmg_shell
                                         + self.crit_dmg_bonus)
 
     def crit_prob(self):
