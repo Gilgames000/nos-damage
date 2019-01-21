@@ -9,6 +9,7 @@ from datastructs.constants import MobType
 @dataclass
 class Entity(TypedJsonMixin):
     # Base
+    name: str = "No_name"
     atk_base: int = 0
     def_base: int = 0
     level: int = 1
