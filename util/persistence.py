@@ -8,8 +8,11 @@ def save_entity(entity, filename):
     save_dataclass(entity.to_dict(), filename)
 
 
-def load_entity(filename):
+def load_entity(filename, update_name=True):
     d = load_dataclass(filename)
+    if update_name:
+        from os.path import basename, splitext
+        d["name"] = splitext(basename(filename))[0]
     return Entity.from_dict(d)
 
 
