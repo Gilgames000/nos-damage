@@ -3,7 +3,7 @@ from math import floor
 from datastructs.constants import elemental_bonus
 from datastructs.constants import equip_up_bonus
 from datastructs.constants import MobType
-from datastructs.constants import DamageType
+from datastructs.constants import Element
 
 
 class Calculator:
@@ -111,7 +111,9 @@ class Calculator:
             not self.attacker.is_mob
             and not self.defender.is_mob
         )
-        matchup = f"{self.attacker.type}>{self.defender.type}"
+        matchup = f"""\
+        {Element(self.attacker.type)}>{Element(self.defender.type)}\
+        """
         res = (
                 self.defender.res
                 - self.attacker.res_reduction
