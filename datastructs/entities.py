@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typed_json_dataclass import TypedJsonMixin
 
 import util.sptools as sp
+from datastructs.constants import Element
 from datastructs.constants import MobType
 
 
@@ -93,7 +94,7 @@ class Entity(TypedJsonMixin):
 
     # Element
     fairy: int = 0
-    type: str = "no_elem"
+    type: Element = Element.NO_ELEMENT
     res: int = 0
 
     # Buffs
