@@ -9,6 +9,8 @@ from datastructs.constants import MobType
 
 @dataclass
 class Entity(TypedJsonMixin):
+    filename: str = None
+
     # Base
     name: str = "No_name"
     atk_base: int = 0
@@ -101,6 +103,8 @@ class Entity(TypedJsonMixin):
     morale_bonus: int = 0
 
     def __post_init__(self):
+        from time import time_ns
+        self.filename = time_ns()
         self._update_build()
 
     @property
