@@ -1501,6 +1501,48 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_25">
                 <item>
+                 <widget class="QLabel" name="label_53">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Res reduction</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="sb_res_reduction">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximum">
+                   <number>200</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_65">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::MinimumExpanding</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
                  <widget class="QLabel" name="label_48">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -1514,7 +1556,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="sb_dmg_increase_2">
+                 <widget class="QSpinBox" name="sb_crit_dmg_eq">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1522,7 +1564,7 @@
                    </sizepolicy>
                   </property>
                   <property name="maximum">
-                   <number>200</number>
+                   <number>500</number>
                   </property>
                  </widget>
                 </item>
@@ -1556,7 +1598,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="sb_dmg_increase_prob_2">
+                 <widget class="QSpinBox" name="sb_crit_prob_eq">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1602,7 +1644,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="sb_dmg_increase">
+                 <widget class="QSpinBox" name="sb_dmg_increase_eq">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1644,7 +1686,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="sb_dmg_increase_prob">
+                 <widget class="QSpinBox" name="sb_dmg_increase_eq_prob">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1745,7 +1787,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="sb_def_armor">
+                 <widget class="QSpinBox" name="sb_def_equip">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1798,6 +1840,100 @@
                    <number>10</number>
                   </property>
                  </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_32">
+                <property name="sizeConstraint">
+                 <enum>QLayout::SetDefaultConstraint</enum>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_66">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Critical damage reduction</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="sb_crit_dmg_reduction">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximum">
+                   <number>500</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_70">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Maximum</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>50</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_65">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Resistance %</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="sb_res">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximum">
+                   <number>500</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_71">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::MinimumExpanding</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>25</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </item>
@@ -1907,7 +2043,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="sb_atk_sp_build">
+                 <widget class="QSpinBox" name="sb_atk_sp_points">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1920,7 +2056,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="sb_def_sp_build">
+                 <widget class="QSpinBox" name="sb_def_sp_points">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1933,7 +2069,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="sb_ele_sp_build">
+                 <widget class="QSpinBox" name="sb_ele_sp_points">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1946,7 +2082,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="sb_hp_sp_build">
+                 <widget class="QSpinBox" name="sb_hp_sp_points">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -2127,7 +2263,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="sb_dmg_s">
+                      <widget class="QSpinBox" name="sb_dmg_increase_s">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2169,7 +2305,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="sb_">
+                      <widget class="QSpinBox" name="sb_crit_dmg_shell">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2199,7 +2335,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_6">
+                      <widget class="QSpinBox" name="sb_res_reduction_pvp">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2241,7 +2377,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_5">
+                      <widget class="QSpinBox" name="sb_dmg_increase_pvp">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2283,7 +2419,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_4">
+                      <widget class="QSpinBox" name="sb_def_reduction_pvp">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2313,7 +2449,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_7">
+                      <widget class="QSpinBox" name="sb_ele_prop_increase">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2355,7 +2491,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_14">
+                      <widget class="QSpinBox" name="sb_dmg_increase_large">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2397,7 +2533,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_13">
+                      <widget class="QSpinBox" name="sb_dmg_increase_undead">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2427,7 +2563,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_10">
+                      <widget class="QSpinBox" name="sb_dmg_increase_animal">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2469,7 +2605,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_11">
+                      <widget class="QSpinBox" name="sb_dmg_increase_evil">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2511,7 +2647,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_12">
+                      <widget class="QSpinBox" name="sb_dmg_increase_plant">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2541,7 +2677,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_8">
+                      <widget class="QSpinBox" name="sb_dmg_increase_low_society">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2596,7 +2732,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_19">
+                      <widget class="QSpinBox" name="sb_def_enhanced">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2638,7 +2774,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_9">
+                      <widget class="QSpinBox" name="sb_def_increase_s">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2680,7 +2816,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_16">
+                      <widget class="QSpinBox" name="sb_def_increase_pvp">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2777,7 +2913,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_20">
+                      <widget class="QSpinBox" name="sb_atk_effects">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2819,7 +2955,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_21">
+                      <widget class="QSpinBox" name="sb_ele_effects">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2861,7 +2997,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_22">
+                      <widget class="QSpinBox" name="sb_atk_hat">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2891,7 +3027,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_23">
+                      <widget class="QSpinBox" name="sb_atk_pet">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2933,7 +3069,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_24">
+                      <widget class="QSpinBox" name="sb_atk_pvp_hono">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2975,7 +3111,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_25">
+                      <widget class="QSpinBox" name="sb_atk_pvp_book">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -2992,7 +3128,49 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_17">
                      <item>
-                      <widget class="QCheckBox" name="checkBox">
+                      <widget class="QLabel" name="label_52">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string>Morale</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QSpinBox" name="sb_morale_bonus">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="maximum">
+                        <number>200</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="horizontalSpacer_64">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::MinimumExpanding</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>25</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QCheckBox" name="cb_atk_oil">
                        <property name="text">
                         <string>Attack oil buff</string>
                        </property>
@@ -3064,7 +3242,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_29">
+                      <widget class="QSpinBox" name="sb_def_effects">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -3106,7 +3284,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_30">
+                      <widget class="QSpinBox" name="sb_def_skill">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -3148,7 +3326,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_31">
+                      <widget class="QSpinBox" name="sb_def_costume">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -3178,7 +3356,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_26">
+                      <widget class="QSpinBox" name="sb_def_pet">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -3220,7 +3398,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_27">
+                      <widget class="QSpinBox" name="sb_def_pet_pvp">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -3262,7 +3440,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_28">
+                      <widget class="QSpinBox" name="sb_def_pvp_book">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -3292,7 +3470,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QSpinBox" name="spinBox_33">
+                      <widget class="QSpinBox" name="sb_def_pvp_hono">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -3321,7 +3499,7 @@
                       </spacer>
                      </item>
                      <item>
-                      <widget class="QCheckBox" name="checkBox_3">
+                      <widget class="QCheckBox" name="cb_def_oil">
                        <property name="text">
                         <string>Defense oil buff</string>
                        </property>
@@ -3344,7 +3522,7 @@
                       </spacer>
                      </item>
                      <item>
-                      <widget class="QCheckBox" name="checkBox_4">
+                      <widget class="QCheckBox" name="cb_def_pot">
                        <property name="text">
                         <string>Defense potion</string>
                        </property>
