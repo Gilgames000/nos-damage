@@ -2,8 +2,10 @@ import sys
 from glob import glob
 
 from PySide2 import QtWidgets
+from PySide2.QtCore import QThreadPool
 
 import util.persistence as ps
+from util.threading import Runnable
 from datastructs.constants import Element
 from datastructs.constants import MobType
 from gui import Ui_MainWindow
@@ -21,8 +23,35 @@ def load_entities():
     return entities
 
 
+def new_entity():
+    from time import time, sleep
+    from datastructs import Entity
+
+    name = "no_name_" + str(int(time()))
+    entity = Entity(name=name)
+
+    entities.append(entity)
+    sort_entities(entities)
+    pos = 0
+    for pos, e in enumerate(entities):
+        if e.name == name:
+            break
+
+    ui.dropdown_entity.insertItem(pos, name)
+    ui.dropdown_entity.setCurrentIndex(pos)
+
+    ui.btn_new.setDisabled(True)
+    sleep(1)
+    ui.btn_new.setDisabled(False)
+
+
 def setup_btn_listeners():
     # Editor entity
+    ui.btn_new.clicked.connect(
+        lambda: QThreadPool.globalInstance().start(
+            Runnable(new_entity)
+        )
+    )
 
     # Editor stacked
     ui.btn_shell_effects.clicked.connect(
