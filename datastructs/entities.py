@@ -55,7 +55,7 @@ class Entity(TypedJsonMixin):
     def_increase_pvp: int = 0
 
     # SP
-    _sp_build = [0, 0, 0, 0]
+    _sp_build: tuple = (0, 0, 0, 0)
     atk_sp_build: int = 0
     atk_sp_pp: int = 0
     atk_sp_bonus: int = 0
