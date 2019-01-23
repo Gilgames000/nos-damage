@@ -7,20 +7,19 @@ from datastructs import Entity
 def load_entities(folder="entities"):
     from glob import glob
     entity_filenames = glob(f"{folder}/*.json")
-    entities = [ps.load_entity(filename=fn) for fn in entity_filenames]
+    entities = [load_entity(filename=fn) for fn in entity_filenames]
 
     return entities
 
 
-def save_entity(entity, filename):
-    save_dataclass(entity.to_dict(), filename)
+def save_entity(entity, folder="entities", filename=None):
+    if not filename:
+        filename = entity.filename
+    save_dataclass(entity.to_dict(), f"{folder}/{filename}.json")
 
 
-def load_entity(filename, update_name=True):
-    d = load_dataclass(filename)
-    if update_name:
-        from os.path import basename, splitext
-        d["name"] = splitext(basename(filename))[0]
+def load_entity(filename, folder="entities"):
+    d = load_dataclass(f"{folder}/{filename}.json")
     return Entity.from_dict(d)
 
 
