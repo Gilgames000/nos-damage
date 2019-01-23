@@ -1,12 +1,24 @@
 import sys
+from glob import glob
 
 from PySide2 import QtWidgets
+
+import util.persistence as ps
 from datastructs.constants import Element
 from datastructs.constants import MobType
-
 from gui import Ui_MainWindow
-import util.persistence as ps
-from glob import glob
+
+
+def sort_entities(entities):
+    entities.sort(key=lambda x: x.name)
+
+
+def load_entities():
+    entity_filenames = glob("entities/*.json")
+    entities = [ps.load_entity(filename=fn) for fn in entity_filenames]
+    sort_entities(entities)
+
+    return entities
 
 
 def setup_btn_listeners():
@@ -131,8 +143,7 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(main_window)
 
-    entity_filenames = glob("entities/*.json")
-    entities = [ps.load_entity(filename=fn) for fn in entity_filenames]
+    entities = load_entities()
 
     ui.dropdown_entity.addItems([entity.name for entity in entities])
     ui.dropdown_element.addItems([element.name.lower() for element in Element])
