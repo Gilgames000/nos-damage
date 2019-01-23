@@ -4,6 +4,14 @@ import logging
 from datastructs import Entity
 
 
+def load_entities(folder="entities"):
+    from glob import glob
+    entity_filenames = glob(f"{folder}/*.json")
+    entities = [ps.load_entity(filename=fn) for fn in entity_filenames]
+
+    return entities
+
+
 def save_entity(entity, filename):
     save_dataclass(entity.to_dict(), filename)
 
