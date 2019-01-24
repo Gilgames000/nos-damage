@@ -12,14 +12,12 @@ def load_entities(folder="entities"):
     return entities
 
 
-def save_entity(entity, folder="entities", filename=None):
-    if not filename:
-        filename = entity.filename
-    save_dataclass(entity.to_dict(), f"{folder}/{filename}.json")
+def save_entity(entity, filename):
+    save_dataclass(entity.to_dict(), filename)
 
 
-def load_entity(filename, folder="entities"):
-    d = load_dataclass(f"{folder}/{filename}.json")
+def load_entity(filename):
+    d = load_dataclass(filename)
     return Entity.from_dict(d)
 
 
