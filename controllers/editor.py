@@ -1,15 +1,14 @@
-from PySide2.QtCore import QThreadPool
-
+import util.persistence as ps
+from datastructs import Entity
 from datastructs.constants import Element
 from datastructs.constants import MobType
-from util.threading import Runnable
-import util.persistence as ps
 
 
 class EditorController:
     def __init__(self, ui, entities):
         self.ui = ui
         self.entities = entities
+        self.guarantee_non_emptiness()
         self.sort_entities()
         self.populate_dropdowns()
         self.setup_btn_listeners()
@@ -52,13 +51,15 @@ class EditorController:
         return name
 
     def duplicate_entity(self):
+        from time import time_ns
         self.disable_editor_buttons()
 
         current_entity = self.entities[self.ui.dropdown_entity.currentIndex()]
-        entity = ps.load_entity(f"entities/{current_entity.name}.json")
+        new_entity = ps.load_entity(f"entities/{current_entity.filename}.json")
         name = self.add_dupe_suffix(current_entity.name)
-        entity.name = name
-        pos = self.add_entity(entity)
+        new_entity.filename = time_ns()
+        new_entity.name = name
+        pos = self.add_entity(new_entity)
 
         self.ui.dropdown_entity.insertItem(pos, name)
         self.ui.dropdown_entity.setCurrentIndex(pos)
@@ -80,18 +81,117 @@ class EditorController:
 
         self.enable_editor_buttons()
 
+    def save_entity(self):
+        self.disable_editor_buttons()
+
+        entity = self.entities[self.ui.dropdown_entity.currentIndex()]
+
+        # Base
+        entity.name = self.ui.le_name.text()
+        entity.level = self.ui.sb_level.value()
+        entity.fairy = self.ui.sb_fairy.value()
+        entity.is_mage = self.ui.cb_is_mage.isChecked()
+        entity.is_mob = self.ui.cb_is_mob.isChecked()
+        entity.mob_type = self.ui.dropdown_mob_type.currentIndex()
+        entity.atk_base = self.ui.sb_atk_base.value()
+        entity.atk_equip_min = self.ui.sb_atk_equip_min.value()
+        entity.atk_equip_max = self.ui.sb_atk_equip_max.value()
+        entity.weapon_up = self.ui.sb_weapon_up.value()
+        entity.crit_dmg_eq = self.ui.sb_crit_dmg_eq.value()
+
+        # Weapon
+        entity.atk_equip_min = self.ui.sb_atk_equip_min.value()
+        entity.atk_equip_max = self.ui.sb_atk_equip_max.value()
+        entity.res_reduction = self.ui.sb_res_reduction.value()
+        entity.dmg_increase_eq = self.ui.sb_dmg_increase_eq.value()
+        entity.dmg_increase_eq_prob = self.ui.sb_dmg_increase_eq_prob.value()
+        entity.crit_dmg_eq = self.ui.sb_crit_dmg_eq.value()
+        entity.crit_prob_eq = self.ui.sb_crit_prob_eq.value()
+        entity.weapon_up = self.ui.sb_weapon_up.value()
+
+        # Armor
+        entity.def_base = self.ui.sb_def_base.value()
+        entity.def_equip = self.ui.sb_def_equip.value()
+        entity.crit_dmg_reduction = self.ui.sb_crit_dmg_reduction.value()
+        entity.armor_up = self.ui.sb_armor_up.value()
+
+        # Weapon shell
+        entity.dmg_enhanced = self.ui.sb_dmg_enhanced.value()
+        entity.dmg_increase_s = self.ui.sb_dmg_increase_s.value()
+        entity.crit_dmg_shell = self.ui.sb_crit_dmg_shell.value()
+        entity.dmg_increase_pvp = self.ui.sb_dmg_increase_pvp.value()
+        entity.def_reduction_pvp = self.ui.sb_def_reduction_pvp.value()
+        entity.res_reduction_pvp = self.ui.sb_res_reduction_pvp.value()
+        entity.ele_prop_increase = self.ui.sb_ele_prop_increase.value()
+        entity.dmg_increase_low_society = self.ui.sb_dmg_increase_low_society.value()
+        entity.dmg_increase_evil = self.ui.sb_dmg_increase_evil.value()
+        entity.dmg_increase_undead = self.ui.sb_dmg_increase_undead.value()
+        entity.dmg_increase_plant = self.ui.sb_dmg_increase_plant.value()
+        entity.dmg_increase_large = self.ui.sb_dmg_increase_large.value()
+        entity.dmg_increase_animal = self.ui.sb_dmg_increase_animal.value()
+
+        # Armor shell
+        entity.def_enhanced = self.ui.sb_def_enhanced.value()
+        entity.def_increase_s = self.ui.sb_def_increase_s.value()
+        entity.def_increase_pvp = self.ui.sb_def_increase_pvp.value()
+
+        # SP
+        entity.sp_build = (
+            self.ui.sb_atk_sp_points.value(),
+            self.ui.sb_def_sp_points.value(),
+            self.ui.sb_ele_sp_points.value(),
+            self.ui.sb_hp_sp_points.value()
+        )
+        entity.atk_sp_pp = self.ui.sb_atk_sp_pp.value()
+        entity.def_sp_pp = self.ui.sb_def_sp_pp.value()
+        entity.ele_sp_pp = self.ui.sb_ele_sp_pp.value()
+
+        # Other attack
+        entity.atk_effects = self.ui.sb_atk_effects.value()
+        entity.ele_effects = self.ui.sb_ele_effects.value()
+        entity.atk_oil = self.ui.cb_atk_oil.isChecked()
+        entity.atk_pot = self.ui.cb_atk_pot.isChecked()
+        entity.atk_hat = self.ui.sb_atk_hat.value()
+        entity.atk_pet = self.ui.sb_atk_pet.value()
+        entity.atk_pvp_hono = self.ui.sb_atk_pvp_hono.value()
+        entity.atk_pvp_book = self.ui.sb_atk_pvp_book.value()
+
+        # Other defense
+        entity.def_effects = self.ui.sb_def_effects.value()
+        entity.def_skill = self.ui.sb_def_skill.value()
+        entity.def_oil = self.ui.cb_def_oil.isChecked()
+        entity.def_pot = self.ui.cb_def_pot.isChecked()
+        entity.def_costume = self.ui.sb_def_costume.value()
+        entity.def_pet = self.ui.sb_def_pet.value()
+        entity.def_pet_pvp = self.ui.sb_def_pet_pvp.value()
+        entity.def_pvp_hono = self.ui.sb_def_pvp_hono.value()
+        entity.def_pvp_book = self.ui.sb_def_pvp_book.value()
+
+        # Element
+        entity.fairy = self.ui.sb_fairy.value()
+        entity.type = self.ui.dropdown_element.currentIndex()
+        entity.res = self.ui.sb_res.value()
+
+        # Buffs
+        entity.morale_bonus = self.ui.sb_morale_bonus.value()
+
+        ps.save_entity(entity, f"entities/{entity.filename}.json")
+
+        idx = self.ui.dropdown_entity.currentIndex()
+        self.sort_entities()
+        new_idx = self.entities.index(entity)
+        self.ui.dropdown_entity.removeItem(idx)
+        self.ui.dropdown_entity.insertItem(new_idx, entity.name)
+        self.ui.dropdown_entity.setCurrentIndex(new_idx)
+        self.display_editor_entity(new_idx)
+
+        self.enable_editor_buttons()
+
     def setup_btn_listeners(self):
         # Editor entity
-        self.ui.btn_new.clicked.connect(
-            lambda: QThreadPool.globalInstance().start(
-                Runnable(self.new_entity)
-            )
-        )
-        self.ui.btn_duplicate.clicked.connect(
-            lambda: QThreadPool.globalInstance().start(
-                Runnable(self.duplicate_entity)
-            )
-        )
+        self.ui.btn_new.clicked.connect(self.new_entity)
+        self.ui.btn_save.clicked.connect(self.save_entity)
+        self.ui.btn_duplicate.clicked.connect(self.duplicate_entity)
 
         # Base
         self.ui.cb_is_mob.clicked.connect(
@@ -117,15 +217,18 @@ class EditorController:
 
     def populate_dropdowns(self):
         self.ui.dropdown_entity.addItems(
-            [entity.name for entity in self.entities
-             ])
+            [entity.name for entity in self.entities]
+        )
         self.ui.dropdown_element.addItems(
             [element.name.lower() for element in Element]
         )
         self.ui.dropdown_mob_type.addItems(
-            [mtype.name.lower() for mtype in MobType])
+            [mtype.name.lower() for mtype in MobType]
+        )
 
     def display_editor_entity(self, index):
+        self.guarantee_non_emptiness()
+
         entity = self.entities[index]
 
         # Base
@@ -222,3 +325,7 @@ class EditorController:
 
         # Buffs
         self.ui.sb_morale_bonus.setValue(entity.morale_bonus)
+
+    def guarantee_non_emptiness(self):
+        if len(self.entities) == 0:
+            self.add_entity(Entity())
