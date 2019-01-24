@@ -16,8 +16,6 @@ if __name__ == "__main__":
 
     editor_controller = EditorController(ui, entities)
 
-    ui.stacked_editor.setCurrentIndex(0)
-
     for i in entities:
         print(i)
 

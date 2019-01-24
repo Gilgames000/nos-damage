@@ -12,7 +12,7 @@ class Entity(TypedJsonMixin):
     filename: str = None
 
     # Base
-    name: str = "No_name"
+    name: str = "no_name"
     atk_base: int = 0
     def_base: int = 0
     level: int = 1
@@ -104,7 +104,7 @@ class Entity(TypedJsonMixin):
 
     def __post_init__(self):
         from time import time_ns
-        self.filename = time_ns()
+        self.filename = str(time_ns())
         self._update_build()
 
     @property
