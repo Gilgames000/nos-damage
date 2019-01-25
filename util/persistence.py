@@ -21,6 +21,13 @@ def load_entity(filename):
     return Entity.from_dict(d)
 
 
+def delete_entity(filename):
+    from os import remove, path
+    logging.info(f"deleting {filename}")
+    if path.isfile(filename):
+        remove(filename)
+
+
 def save_dataclass(data, filename):
     try:
         logging.info(f"saving dataclass to {filename}")
