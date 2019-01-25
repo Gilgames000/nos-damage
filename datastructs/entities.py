@@ -104,7 +104,8 @@ class Entity(TypedJsonMixin):
 
     def __post_init__(self):
         from time import time_ns
-        self.filename = str(time_ns())
+        if not self.filename:
+            self.filename = str(time_ns())
         self._update_build()
 
     @property
