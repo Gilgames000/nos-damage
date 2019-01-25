@@ -44,7 +44,7 @@ class EditorController:
     def add_dupe_suffix(self, name):
         dupes = 1
         while self.entity_exists(name):
-            name = f"no_name_{dupes}"
+            name = f"{name}_{dupes}"
             dupes += 1
 
         return name
