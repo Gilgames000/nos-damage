@@ -8,7 +8,6 @@ class EditorController:
     def __init__(self, ui, entities):
         self.ui = ui
         self.entities = entities
-        self.guarantee_non_emptiness()
         self.sort_entities()
         self.populate_dropdowns()
         self.setup_btn_listeners()
@@ -26,7 +25,7 @@ class EditorController:
             self.sort_entities()
             pos = self.entities.index(entity)
         else:
-            pos = len(self.entities) - 1
+            pos = max(0, len(self.entities) - 1)
 
         return pos
 
@@ -85,7 +84,8 @@ class EditorController:
         from os import path, mkdir
         self.disable_editor_buttons()
 
-        entity = self.entities[self.ui.dropdown_entity.currentIndex()]
+        idx = self.ui.dropdown_entity.currentIndex()
+        entity = self.entities[idx]
 
         # Base
         entity.name = self.ui.le_name.text()
@@ -190,11 +190,23 @@ class EditorController:
 
         self.enable_editor_buttons()
 
+    def delete_entity(self):
+        self.disable_editor_buttons()
+
+        idx = self.ui.dropdown_entity.currentIndex()
+        self.ui.dropdown_entity.removeItem(idx)
+        ps.delete_entity(f"entities/{self.entities[idx].filename}.json")
+        del self.entities[idx]
+
+        self.display_editor_entity(idx - 1)
+        self.enable_editor_buttons()
+
     def setup_btn_listeners(self):
         # Editor entity
         self.ui.btn_new.clicked.connect(self.new_entity)
         self.ui.btn_save.clicked.connect(self.save_entity)
         self.ui.btn_duplicate.clicked.connect(self.duplicate_entity)
+        self.ui.btn_delete.clicked.connect(self.delete_entity)
 
         # Base
         self.ui.cb_is_mob.clicked.connect(
@@ -330,5 +342,8 @@ class EditorController:
         self.ui.sb_morale_bonus.setValue(entity.morale_bonus)
 
     def guarantee_non_emptiness(self):
-        if len(self.entities) == 0:
-            self.add_entity(Entity())
+        if not self.entities:
+            new_entity = Entity()
+            self.entities.append(new_entity)
+            self.ui.dropdown_entity.addItem(new_entity.name)
+            self.display_editor_entity(0)
