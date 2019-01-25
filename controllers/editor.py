@@ -82,6 +82,7 @@ class EditorController:
         self.enable_editor_buttons()
 
     def save_entity(self):
+        from os import path, mkdir
         self.disable_editor_buttons()
 
         entity = self.entities[self.ui.dropdown_entity.currentIndex()]
@@ -175,6 +176,8 @@ class EditorController:
         # Buffs
         entity.morale_bonus = self.ui.sb_morale_bonus.value()
 
+        if not path.isdir("entities"):
+            mkdir("entities", 0o777)
         ps.save_entity(entity, f"entities/{entity.filename}.json")
 
         idx = self.ui.dropdown_entity.currentIndex()
