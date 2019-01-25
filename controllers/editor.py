@@ -64,6 +64,8 @@ class EditorController:
         self.ui.dropdown_entity.insertItem(pos, name)
         self.ui.dropdown_entity.setCurrentIndex(pos)
 
+        self.save_entity()
+
         self.enable_editor_buttons()
 
     def new_entity(self):
@@ -79,6 +81,8 @@ class EditorController:
 
         self.ui.dropdown_entity.insertItem(pos, name)
         self.ui.dropdown_entity.setCurrentIndex(pos)
+
+        self.save_entity()
 
         self.enable_editor_buttons()
 
