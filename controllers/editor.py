@@ -55,7 +55,8 @@ class EditorController:
 
         current_entity = self.entities[self.ui.dropdown_entity.currentIndex()]
         new_entity = ps.load_entity(f"entities/{current_entity.filename}.json")
-        name = self.add_dupe_suffix(current_entity.name)
+        name = current_entity.name
+        # name = self.add_dupe_suffix(current_entity.name)
         new_entity.filename = time_ns()
         new_entity.name = name
         pos = self.add_entity(new_entity)
@@ -70,7 +71,8 @@ class EditorController:
 
         self.disable_editor_buttons()
 
-        name = self.add_dupe_suffix("no_name")
+        name = "no_name"
+        # name = self.add_dupe_suffix("no_name")
 
         entity = Entity(name=name)
         pos = self.add_entity(entity)
