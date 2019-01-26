@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'gui/main_window.ui',
 # licensing of 'gui/main_window.ui' applies.
 #
-# Created: Wed Jan 23 10:03:29 2019
+# Created: Sat Jan 26 19:08:29 2019
 #      by: pyside2-uic  running on PySide2 5.12.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -56,6 +56,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.dropdown_calc_attacker.sizePolicy().hasHeightForWidth())
         self.dropdown_calc_attacker.setSizePolicy(sizePolicy)
+        self.dropdown_calc_attacker.setInsertPolicy(QtWidgets.QComboBox.InsertAlphabetically)
         self.dropdown_calc_attacker.setObjectName("dropdown_calc_attacker")
         self.horizontalLayout_27.addWidget(self.dropdown_calc_attacker)
         self.verticalLayout_20.addLayout(self.horizontalLayout_27)
@@ -69,15 +70,15 @@ class Ui_MainWindow(object):
         self.label_21.setSizePolicy(sizePolicy)
         self.label_21.setObjectName("label_21")
         self.horizontalLayout_28.addWidget(self.label_21)
-        self.sb_calc_skill_atk = QtWidgets.QSpinBox(self.tab_calculator)
+        self.sb_calc_atk_skill = QtWidgets.QSpinBox(self.tab_calculator)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.sb_calc_skill_atk.sizePolicy().hasHeightForWidth())
-        self.sb_calc_skill_atk.setSizePolicy(sizePolicy)
-        self.sb_calc_skill_atk.setMaximum(9999)
-        self.sb_calc_skill_atk.setObjectName("sb_calc_skill_atk")
-        self.horizontalLayout_28.addWidget(self.sb_calc_skill_atk)
+        sizePolicy.setHeightForWidth(self.sb_calc_atk_skill.sizePolicy().hasHeightForWidth())
+        self.sb_calc_atk_skill.setSizePolicy(sizePolicy)
+        self.sb_calc_atk_skill.setMaximum(9999)
+        self.sb_calc_atk_skill.setObjectName("sb_calc_atk_skill")
+        self.horizontalLayout_28.addWidget(self.sb_calc_atk_skill)
         spacerItem1 = QtWidgets.QSpacerItem(25, 20, QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_28.addItem(spacerItem1)
         self.label_23 = QtWidgets.QLabel(self.tab_calculator)
@@ -88,15 +89,15 @@ class Ui_MainWindow(object):
         self.label_23.setSizePolicy(sizePolicy)
         self.label_23.setObjectName("label_23")
         self.horizontalLayout_28.addWidget(self.label_23)
-        self.sb_calc_skill_ele = QtWidgets.QSpinBox(self.tab_calculator)
+        self.sb_calc_ele_skill = QtWidgets.QSpinBox(self.tab_calculator)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.sb_calc_skill_ele.sizePolicy().hasHeightForWidth())
-        self.sb_calc_skill_ele.setSizePolicy(sizePolicy)
-        self.sb_calc_skill_ele.setMaximum(9999)
-        self.sb_calc_skill_ele.setObjectName("sb_calc_skill_ele")
-        self.horizontalLayout_28.addWidget(self.sb_calc_skill_ele)
+        sizePolicy.setHeightForWidth(self.sb_calc_ele_skill.sizePolicy().hasHeightForWidth())
+        self.sb_calc_ele_skill.setSizePolicy(sizePolicy)
+        self.sb_calc_ele_skill.setMaximum(9999)
+        self.sb_calc_ele_skill.setObjectName("sb_calc_ele_skill")
+        self.horizontalLayout_28.addWidget(self.sb_calc_ele_skill)
         spacerItem2 = QtWidgets.QSpacerItem(25, 20, QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_28.addItem(spacerItem2)
         self.verticalLayout_20.addLayout(self.horizontalLayout_28)
@@ -1721,7 +1722,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.tab_main)
         MainWindow.setCentralWidget(self.centralWidget)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 985, 26))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 985, 30))
         self.menuBar.setObjectName("menuBar")
         MainWindow.setMenuBar(self.menuBar)
         self.mainToolBar = QtWidgets.QToolBar(MainWindow)
@@ -1732,7 +1733,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusBar)
 
         self.retranslateUi(MainWindow)
-        self.tab_main.setCurrentIndex(2)
+        self.tab_main.setCurrentIndex(0)
         self.stacked_editor.setCurrentIndex(0)
         self.dropdown_element.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
