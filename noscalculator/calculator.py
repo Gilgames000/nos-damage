@@ -15,7 +15,7 @@ class Calculator:
             defenders_list = []
         self.defenders_list = defenders_list
 
-    def atk_tot(self, atk_eq, soft=False):
+    def _atk_tot(self, atk_eq, soft=False):
         is_pvp = int(
             not self.attacker.is_mob
             and not self.defender.is_mob
@@ -52,7 +52,7 @@ class Calculator:
                 * (1 + self.attacker.dmg_increase_eq / 100 * int(soft))
         )
 
-    def def_tot(self):
+    def _def_tot(self):
         is_pvp = int(
             not self.attacker.is_mob
             and not self.defender.is_mob
@@ -79,9 +79,9 @@ class Calculator:
                         + self.defender.def_pet) / 100)
         )
 
-    def atk_ele_tot(self, atk_eq, soft=False):
+    def _atk_ele_tot(self, atk_eq, soft=False):
         atk_ele = (
-                (self.atk_tot(atk_eq, soft=soft) + 100)
+                (self._atk_tot(atk_eq, soft=soft) + 100)
                 * (self.attacker.fairy + self.attacker.ele_sp()) / 100
         )
 
@@ -92,9 +92,9 @@ class Calculator:
                 + self.attacker.ele_prop_increase
         )
 
-    def physical_damage(self, atk_eq, crit=False, soft=False):
+    def _physical_damage(self, atk_eq, crit=False, soft=False):
         dmg = (
-                (self.atk_tot(atk_eq, soft=soft) - self.def_tot())
+                (self._atk_tot(atk_eq, soft=soft) - self._def_tot())
                 * (1 + int(self.attacker.atk_oil) * 0.05)
         )
 
@@ -106,7 +106,7 @@ class Calculator:
 
         return dmg
 
-    def elemental_damage(self, atk_eq, soft=False):
+    def _elemental_damage(self, atk_eq, soft=False):
         is_pvp = int(
             not self.attacker.is_mob
             and not self.defender.is_mob
@@ -121,13 +121,13 @@ class Calculator:
         )
 
         return (
-                self.atk_ele_tot(atk_eq, soft=soft)
+                self._atk_ele_tot(atk_eq, soft=soft)
                 * (1 + elemental_bonus(matchup))
                 * (1 - res / 100)
         )
 
-    def final_damage(self, atk_eq, crit=False, soft=False, no_ele=False,
-                     is_min=False, max_crit_dmg=0):
+    def _final_damage(self, atk_eq, crit=False, soft=False, no_ele=False,
+                      is_min=False, max_crit_dmg=0):
         is_pvp = int(
             not self.attacker.is_mob
             and not self.defender.is_mob
@@ -137,9 +137,9 @@ class Calculator:
         if no_ele:
             elemental_damage = 0
         else:
-            elemental_damage = self.elemental_damage(atk_eq, soft=soft)
+            elemental_damage = self._elemental_damage(atk_eq, soft=soft)
 
-        physical_damage = self.physical_damage(atk_eq, crit=crit, soft=soft)
+        physical_damage = self._physical_damage(atk_eq, crit=crit, soft=soft)
 
         if crit and is_min:
             physical_damage = (physical_damage + max_crit_dmg) / 2
@@ -165,7 +165,7 @@ class Calculator:
         return dmg
 
     def damage(self, crit=False, soft=False, no_ele=False, average=False):
-        dmg_max = self.final_damage(
+        dmg_max = self._final_damage(
             self.attacker.atk_equip_max,
             crit=crit,
             soft=soft,
@@ -173,7 +173,7 @@ class Calculator:
         )
 
         if crit:
-            max_crit_dmg = self.physical_damage(
+            max_crit_dmg = self._physical_damage(
                 self.attacker.atk_equip_max,
                 crit=crit,
                 soft=soft
@@ -181,7 +181,7 @@ class Calculator:
         else:
             max_crit_dmg = 0
 
-        dmg_min = self.final_damage(
+        dmg_min = self._final_damage(
             self.attacker.atk_equip_min,
             crit=crit,
             soft=soft,
