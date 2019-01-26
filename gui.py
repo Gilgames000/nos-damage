@@ -5,6 +5,7 @@ from PySide2 import QtWidgets
 import util.persistence as ps
 from controllers.editor import EditorController
 from gui import Ui_MainWindow
+from util.observables import ObservableList
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -12,7 +13,7 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(main_window)
 
-    entities = ps.load_entities()
+    entities = ObservableList(ps.load_entities())
 
     editor_controller = EditorController(ui, entities)
 

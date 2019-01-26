@@ -202,6 +202,7 @@ class EditorController:
         self.ui.dropdown_entity.setCurrentIndex(new_idx)
         self.display_editor_entity(new_idx)
 
+        self.entities.notify_observers()
         self.enable_editor_buttons()
 
     def delete_entity(self):
@@ -213,6 +214,7 @@ class EditorController:
         self.entities.remove(self.entities[idx])
 
         self.display_editor_entity(idx - 1)
+        self.entities.notify_observers()
         self.enable_editor_buttons()
 
     def setup_btn_listeners(self):
