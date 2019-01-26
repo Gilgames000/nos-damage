@@ -170,16 +170,6 @@ def def_bonus_build(hp=0, build=None):
                      "between 0 and 100")
 
 
-def crit_dmg_bonus():
-    # TODO: crit damage bonus calculation
-    pass
-
-
-def crit_prob_bonus():
-    # TODO: crit probablity bonus calculation
-    pass
-
-
 def sp_points(job, up):
     if not 0 <= job <= 99:
         raise ValueError("SP job must be an integer between 0 and 99")
