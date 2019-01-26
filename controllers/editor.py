@@ -260,6 +260,7 @@ class EditorController:
     def display_editor_entity(self, index):
         self.guarantee_non_emptiness()
 
+        index = min(max(index, 0), len(self.entities) - 1)
         entity = self.entities[index]
 
         # Base
