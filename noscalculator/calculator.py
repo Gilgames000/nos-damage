@@ -165,6 +165,9 @@ class Calculator:
         return dmg
 
     def damage(self, crit=False, soft=False, no_ele=False, average=False):
+        if self.attacker.type == Element.NO_ELEMENT.value:
+            no_ele = True
+
         dmg_max = self._final_damage(
             self.attacker.atk_equip_max,
             crit=crit,
@@ -204,11 +207,11 @@ class Calculator:
         soft_crit = soft / 100 * crit / 100
         normal = 1 - soft - crit - soft_crit
 
-        return (
-                self.damage(average=True) * normal
-                + self.damage(average=True, soft=True) * soft
-                + self.damage(average=True, crit=True) * crit
-                + self.damage(average=True, soft=True, crit=True) * soft_crit
+        return floor(
+            self.damage(average=True) * normal
+            + self.damage(average=True, soft=True) * soft
+            + self.damage(average=True, crit=True) * crit
+            + self.damage(average=True, soft=True, crit=True) * soft_crit
         )
 
     def swap_attacker_defender(self):
