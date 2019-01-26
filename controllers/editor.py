@@ -20,12 +20,16 @@ class EditorController:
         return True in map(lambda e: name == e.name, self.entities)
 
     def add_entity(self, entity, sort=True):
-        self.entities.append(entity)
         if sort:
-            self.sort_entities()
-            pos = self.entities.index(entity)
+            idx = 0
+            for idx, current_entity in enumerate(self.entities):
+                if entity.name < current_entity.name:
+                    break
+            self.entities.insert(idx, entity)
+            pos = idx
         else:
-            pos = max(0, len(self.entities) - 1)
+            self.entities.append(entity)
+            pos = len(self.entities) - 1
 
         return pos
 
@@ -187,8 +191,12 @@ class EditorController:
         ps.save_entity(entity, f"entities/{entity.filename}.json")
 
         idx = self.ui.dropdown_entity.currentIndex()
-        self.sort_entities()
-        new_idx = self.entities.index(entity)
+        if entity.name != self.entities[idx]:
+            self.entities.remove(entity)
+            new_idx = self.add_entity(entity)
+        else:
+            new_idx = idx
+
         self.ui.dropdown_entity.removeItem(idx)
         self.ui.dropdown_entity.insertItem(new_idx, entity.name)
         self.ui.dropdown_entity.setCurrentIndex(new_idx)
