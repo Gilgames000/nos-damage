@@ -360,7 +360,4 @@ class EditorController:
 
     def guarantee_non_emptiness(self):
         if not self.entities:
-            new_entity = Entity()
-            self.entities.append(new_entity)
-            self.ui.dropdown_entity.addItem(new_entity.name)
-            self.display_editor_entity(0)
+            self.new_entity()
