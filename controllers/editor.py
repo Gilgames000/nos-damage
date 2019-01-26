@@ -202,7 +202,7 @@ class EditorController:
         idx = self.ui.dropdown_entity.currentIndex()
         self.ui.dropdown_entity.removeItem(idx)
         ps.delete_entity(f"entities/{self.entities[idx].filename}.json")
-        del self.entities[idx]
+        self.entities.remove(self.entities[idx])
 
         self.display_editor_entity(idx - 1)
         self.enable_editor_buttons()
