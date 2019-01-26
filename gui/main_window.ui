@@ -30,7 +30,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="usesScrollButtons">
        <bool>false</bool>
@@ -89,6 +89,9 @@
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="insertPolicy">
+                 <enum>QComboBox::InsertAlphabetically</enum>
+                </property>
                </widget>
               </item>
              </layout>
@@ -109,7 +112,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QSpinBox" name="sb_calc_skill_atk">
+               <widget class="QSpinBox" name="sb_calc_atk_skill">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -151,7 +154,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QSpinBox" name="sb_calc_skill_ele">
+               <widget class="QSpinBox" name="sb_calc_ele_skill">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -3603,7 +3606,7 @@
      <x>0</x>
      <y>0</y>
      <width>985</width>
-     <height>26</height>
+     <height>30</height>
     </rect>
    </property>
   </widget>
