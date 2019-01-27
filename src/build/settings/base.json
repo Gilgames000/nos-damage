@@ -1,0 +1,6 @@
+{
+    "app_name": "NosDamage",
+    "author": "Gilgames",
+    "main_module": "src/main/python/main.py",
+    "version": "0.1.0"
+}
