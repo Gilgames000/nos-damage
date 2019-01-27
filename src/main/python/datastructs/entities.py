@@ -1,14 +1,15 @@
 from dataclasses import dataclass
 
-from typed_json_dataclass import TypedJsonMixin
+from dataclasses_json import DataClassJsonMixin
 
 import util.sptools as sp
 from datastructs.constants import Element
 from datastructs.constants import MobType
+from typing import List
 
 
 @dataclass
-class Entity(TypedJsonMixin):
+class Entity(DataClassJsonMixin):
     filename: str = None
 
     # Base
@@ -57,7 +58,7 @@ class Entity(TypedJsonMixin):
     def_increase_pvp: int = 0
 
     # SP
-    _sp_build: tuple = (0, 0, 0, 0)
+    _sp_build: List[int] = None
     atk_sp_build: int = 0
     atk_sp_pp: int = 0
     atk_sp_bonus: int = 0
@@ -103,9 +104,11 @@ class Entity(TypedJsonMixin):
     morale_bonus: int = 0
 
     def __post_init__(self):
-        from time import time_ns
+        import time
         if not self.filename:
-            self.filename = str(time_ns())
+            self.filename = str(int(time.time() * 10 ** 6))
+        if not self._sp_build:
+            self._sp_build = [0, 0, 0, 0]
         self._update_build()
 
     @property

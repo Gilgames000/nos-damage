@@ -13,12 +13,12 @@ def load_entities(folder="entities"):
 
 
 def save_entity(entity, filename):
-    save_dataclass(entity.to_dict(), filename)
+    save_dataclass(json.loads(entity.to_json()), filename)
 
 
 def load_entity(filename):
     d = load_dataclass(filename)
-    return Entity.from_dict(d)
+    return Entity.from_json(d)
 
 
 def delete_entity(filename):
@@ -48,4 +48,4 @@ def load_dataclass(filename):
         logging.info(f"couldn't load dataclass from {filename}, file not "
                      f"found")
     finally:
-        return data
+        return json.dumps(data)
