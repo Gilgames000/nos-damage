@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'src/main/python/gui/main_window.ui',
 # licensing of 'src/main/python/gui/main_window.ui' applies.
 #
-# Created: Mon Jan 28 18:10:28 2019
+# Created: Mon Jan 28 18:12:44 2019
 #      by: pyside2-uic  running on PySide2 5.12.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -446,10 +446,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_20.addWidget(self.btn_calculate)
         self.verticalLayout_16.addLayout(self.horizontalLayout_20)
         self.tab_main.addTab(self.tab_calculator, "")
-        self.tab_optimizer = QtWidgets.QWidget()
-        self.tab_optimizer.setEnabled(True)
-        self.tab_optimizer.setObjectName("tab_optimizer")
-        self.tab_main.addTab(self.tab_optimizer, "")
         self.tab_editor = QtWidgets.QWidget()
         self.tab_editor.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -1730,7 +1726,7 @@ class Ui_MainWindow(object):
         MainWindow.setMenuBar(self.menuBar)
 
         self.retranslateUi(MainWindow)
-        self.tab_main.setCurrentIndex(0)
+        self.tab_main.setCurrentIndex(1)
         self.stacked_editor.setCurrentIndex(0)
         self.dropdown_element.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -1763,7 +1759,6 @@ class Ui_MainWindow(object):
         self.lb_calc_average.setText(QtWidgets.QApplication.translate("MainWindow", "9999999", None, -1))
         self.btn_calculate.setText(QtWidgets.QApplication.translate("MainWindow", "Calculate", None, -1))
         self.tab_main.setTabText(self.tab_main.indexOf(self.tab_calculator), QtWidgets.QApplication.translate("MainWindow", "Calculator", None, -1))
-        self.tab_main.setTabText(self.tab_main.indexOf(self.tab_optimizer), QtWidgets.QApplication.translate("MainWindow", "Optimizer", None, -1))
         self.btn_new.setText(QtWidgets.QApplication.translate("MainWindow", "New", None, -1))
         self.btn_save.setText(QtWidgets.QApplication.translate("MainWindow", "Save", None, -1))
         self.btn_duplicate.setText(QtWidgets.QApplication.translate("MainWindow", "Duplicate", None, -1))
