@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'gui/main_window.ui',
-# licensing of 'gui/main_window.ui' applies.
+# Form implementation generated from reading ui file 'src/main/python/gui/main_window.ui',
+# licensing of 'src/main/python/gui/main_window.ui' applies.
 #
-# Created: Sat Jan 26 19:08:29 2019
+# Created: Mon Jan 28 18:10:28 2019
 #      by: pyside2-uic  running on PySide2 5.12.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -1721,16 +1721,13 @@ class Ui_MainWindow(object):
         self.tab_main.addTab(self.tab_editor, "")
         self.verticalLayout.addWidget(self.tab_main)
         MainWindow.setCentralWidget(self.centralWidget)
+        self.statusBar = QtWidgets.QStatusBar(MainWindow)
+        self.statusBar.setObjectName("statusBar")
+        MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 985, 30))
         self.menuBar.setObjectName("menuBar")
         MainWindow.setMenuBar(self.menuBar)
-        self.mainToolBar = QtWidgets.QToolBar(MainWindow)
-        self.mainToolBar.setObjectName("mainToolBar")
-        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
-        self.statusBar = QtWidgets.QStatusBar(MainWindow)
-        self.statusBar.setObjectName("statusBar")
-        MainWindow.setStatusBar(self.statusBar)
 
         self.retranslateUi(MainWindow)
         self.tab_main.setCurrentIndex(0)
