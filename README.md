@@ -18,10 +18,11 @@ purpose of easily manage the calculator and its features, which at the moment, a
 - Damage calculator (normal/crit/soft/softcrit/average)
 - Editor to handily create and manage your attackers/defenders
 
-There also an sp build optimizer that at the moment is only available through
+There is also an sp build optimizer that, at the moment, is only available through
 command line interface. It will take the stats of the character you input as
-attacker and brute-force against one or more defenders to find the build with
-the highest (average) damage output. You can specify job/up oof your sp and your SLs.
+attacker and brute-force through all possible builds against one or more defenders to find
+the one with the highest (average) damage output.
+You can specify job/up of your sp and your SLs.
 
 ## Upcoming features
 - SP build damage output optimizer (just needs to be added to the GUI)
