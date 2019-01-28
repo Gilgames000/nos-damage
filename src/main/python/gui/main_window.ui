@@ -30,7 +30,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="usesScrollButtons">
        <bool>false</bool>
@@ -998,14 +998,6 @@
          </layout>
         </item>
        </layout>
-      </widget>
-      <widget class="QWidget" name="tab_optimizer">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <attribute name="title">
-        <string>Optimizer</string>
-       </attribute>
       </widget>
       <widget class="QWidget" name="tab_editor">
        <property name="enabled">
