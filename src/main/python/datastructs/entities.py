@@ -104,9 +104,9 @@ class Entity(DataClassJsonMixin):
     morale_bonus: int = 0
 
     def __post_init__(self):
-        import time
+        from util.filenametools import generate_filename
         if not self.filename:
-            self.filename = str(int(time.time() * 10 ** 6))
+            self.filename = generate_filename()
         if not self._sp_build:
             self._sp_build = [0, 0, 0, 0]
         self._update_build()
