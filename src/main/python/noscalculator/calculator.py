@@ -48,7 +48,7 @@ class Calculator:
 
         return (
                 (atk_char + self.attacker.atk_skill + 15)
-                * (1 + self.attacker.dmg_increase_s + mob_type_dmg / 100)
+                * (1 + (self.attacker.dmg_increase_s + mob_type_dmg) / 100)
                 * (1 + self.attacker.dmg_increase_eq / 100 * int(soft))
         )
 
