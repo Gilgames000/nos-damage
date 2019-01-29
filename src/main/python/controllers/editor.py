@@ -54,14 +54,14 @@ class EditorController:
         return name
 
     def duplicate_entity(self):
-        from time import time_ns
+        from util.filenametools import generate_filename
         self.disable_editor_buttons()
 
         current_entity = self.entities[self.ui.dropdown_entity.currentIndex()]
         new_entity = ps.load_entity(f"entities/{current_entity.filename}.json")
         name = current_entity.name
         # name = self.add_dupe_suffix(current_entity.name)
-        new_entity.filename = time_ns()
+        new_entity.filename = generate_filename()
         new_entity.name = name
         pos = self.add_entity(new_entity)
 
