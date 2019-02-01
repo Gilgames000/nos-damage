@@ -2,9 +2,23 @@ import json
 import logging
 from urllib.request import urlopen
 
+from PySide2.QtCore import QThread
+from PySide2.QtCore import Signal
+
+
+class VersionCheckerService(QThread):
+    needUpdate = Signal(bool)
+
+    def __init__(self, version):
+        super(VersionCheckerService, self).__init__()
+        self.version = version
+
+    def run(self):
+        self.needUpdate.emit(update_needed(self.version))
+
 
 def retrieve_version(version_url="https://raw.githubusercontent.com/"
-                                 + "Gilgames000/nos-damage/develop/"
+                                 + "Gilgames000/nos-damage/master/"
                                  + "src/build/settings/base.json"):
     version = "0.0.0"
     try:
