@@ -83,6 +83,3 @@ When filing a new bug, please include:
 ## Contacts
 - Telegram: [Gilgames](https://t.me/Gilgames)
 - Discord: Gilgames#3236
-- NosTale Vendetta Forum: [Gilgames](https://forum.vendettagn.com/index.php?/profile/4671-gilgames/)
-- NosTale IT Forum: [Gilgames](https://board.it.nostale.gameforge.com/index.php/User/45597-Gilgames/)
-- NosTale EN Forum: [Gilgames](https://board.en.nostale.gameforge.com/index.php/User/34739-Gilgames/)
